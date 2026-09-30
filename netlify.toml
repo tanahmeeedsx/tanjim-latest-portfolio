@@ -1,0 +1,4 @@
+# Tells Netlify to serve the static site from the site/ folder.
+# index.html and resume.pdf both live inside site/.
+[build]
+  publish = "site"

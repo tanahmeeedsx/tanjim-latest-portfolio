@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Tanjim Ahmed - DevOps Intern at Springer Capital. CI/CD, Docker, AWS, observability and reliable infrastructure.">
+<meta name="theme-color" content="#0a1628">
+<title>Tanjim Ahmed | DevOps Engineer</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif}
+.code-font{font-family:'Fira Code',monospace}
+.glass{background:rgba(255,255,255,.035);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.09)}
+.grid-bg{background-image:linear-gradient(rgba(59,130,246,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,.07) 1px,transparent 1px);background-size:42px 42px}
+.gradient-text{background:linear-gradient(90deg,#60a5fa,#38bdf8);-webkit-background-clip:text;background-clip:text;color:transparent}
+.section-number{color:#3b82f6;font-family:'Fira Code',monospace}
+.terminal-dot{width:10px;height:10px;border-radius:999px}
+.skill-card,.project-card,.focus-card{transition:transform .25s ease,border-color .25s ease}
+.skill-card:hover,.project-card:hover,.focus-card:hover{transform:translateY(-4px)}
+.node{background:rgba(10,22,40,.9);border:1px solid rgba(96,165,250,.25);border-radius:14px;padding:14px 16px;text-align:center;min-width:120px}
+.ev{background:rgba(10,22,40,.5);border:1px solid rgba(255,255,255,.07)}
+details>summary{list-style:none}
+details>summary::-webkit-details-marker{display:none}
+details[open] .chev{transform:rotate(180deg)}
+.chev{transition:transform .2s ease}
+</style>
+</head>
+<body class="bg-[#0a1628] text-slate-300 antialiased selection:bg-blue-500/30 selection:text-white">
+
+<nav class="fixed top-0 w-full z-50 glass border-x-0 border-t-0">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <a href="#home" class="text-white font-bold text-lg md:text-xl" aria-label="Go to home section">Tanjim <span class="text-blue-400">Ahmed</span></a>
+    <div class="space-x-7 hidden md:flex items-center text-sm font-medium tracking-wide">
+      <a href="#about" class="hover:text-blue-400 transition">About</a>
+      <a href="#skills" class="hover:text-blue-400 transition">Tech Stack</a>
+      <a href="#projects" class="hover:text-blue-400 transition">Projects</a>
+      <a href="#production" class="hover:text-blue-400 transition">Production Mindset</a>
+      <a href="#journey" class="hover:text-blue-400 transition">Journey</a>
+      <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition">Resume</a>
+      <a href="#contact" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500 transition">Get in Touch</a>
+    </div>
+    <div class="md:hidden flex items-center gap-2"><a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="text-sm px-4 py-2 glass text-white rounded-lg">Resume</a><a href="#contact" class="text-sm px-4 py-2 bg-blue-600 text-white rounded-lg">Contact</a></div>
+  </div>
+</nav>
+
+<header id="home" class="relative pt-36 pb-24 px-6 overflow-hidden grid-bg">
+  <div class="absolute inset-0 bg-gradient-to-b from-blue-500/5 via-transparent to-[#0a1628]"></div>
+  <div class="relative max-w-5xl mx-auto text-center">
+    <div class="inline-flex items-center gap-2 px-4 py-2 mb-7 text-xs font-semibold tracking-wider text-blue-300 uppercase bg-blue-400/10 rounded-full border border-blue-400/20">
+      <span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span>
+      Open to DevOps / Cloud / SRE / Platform Engineering opportunities
+    </div>
+    <p class="code-font text-sky-400 text-sm md:text-base mb-5">DevOps Intern at Springer Capital &middot; Remote, Chicago, USA</p>
+    <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-7 tracking-tight leading-tight">Automating <span class="gradient-text">Reliable Infrastructure</span> at Scale.</h1>
+    <p class="text-lg md:text-xl text-slate-400 mb-10 max-w-3xl mx-auto leading-relaxed">I ship Dockerized apps through GitHub Actions to AWS, then watch them with health checks, logs and alerts. I learn by breaking real systems and fixing them.</p>
+    <div class="flex flex-col sm:flex-row justify-center gap-4 mb-14">
+      <a href="#projects" class="px-8 py-4 bg-white text-slate-900 font-bold rounded-xl hover:bg-slate-200 transition"><i class="fa-solid fa-layer-group mr-2"></i> View Projects</a>
+      <a href="https://github.com/tanahmeeedsx" target="_blank" rel="noopener noreferrer" class="px-8 py-4 glass text-white font-bold rounded-xl hover:bg-white/5 transition"><i class="fa-brands fa-github mr-2"></i> GitHub</a>
+      <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="px-8 py-4 glass text-white font-bold rounded-xl hover:bg-white/5 transition" aria-label="Download resume PDF"><i class="fa-solid fa-file-arrow-down mr-2"></i> Resume</a>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto text-left">
+      <div class="glass rounded-2xl p-5"><p class="text-2xl font-bold text-white">Every push</p><p class="text-xs text-slate-500 mt-1">Triggers CI, then deploys when green</p></div>
+      <div class="glass rounded-2xl p-5"><p class="text-2xl font-bold text-white">3</p><p class="text-xs text-slate-500 mt-1">AWS deployments shipped end to end</p></div>
+      <div class="glass rounded-2xl p-5"><p class="text-2xl font-bold text-white">1,000+</p><p class="text-xs text-slate-500 mt-1">CI errors traced to one root cause</p></div>
+      <div class="glass rounded-2xl p-5"><p class="text-lg font-bold text-white">Observable</p><p class="text-xs text-slate-500 mt-1">Health checks, logs &amp; alerts</p></div>
+    </div>
+  </div>
+</header>
+
+<section id="about" class="py-24 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid lg:grid-cols-[1.1fr_.9fr] gap-12 items-start">
+      <div>
+        <div class="flex items-center gap-4 mb-7"><span class="section-number text-xl">01.</span><h2 class="text-3xl md:text-4xl font-bold text-white">What I Solve</h2></div>
+        <h3 class="text-2xl md:text-3xl font-semibold text-white leading-snug mb-6">I take code from a commit to a <span class="gradient-text">reachable, observable production URL.</span></h3>
+        <p class="text-slate-400 leading-8 mb-6">My work sits between application code and a running system: CI pipelines, Docker images, AWS deployments, and the debugging that starts when a green pipeline still is not reachable.</p>
+        <p class="text-slate-400 leading-8">I am a DevOps Intern at Springer Capital. Every project below is a real pipeline or server that broke at least once, and I write down what broke, because that is where I learn the most.</p>
+      </div>
+      <div class="glass rounded-3xl overflow-hidden">
+        <div class="flex items-center gap-2 px-5 py-4 border-b border-white/10 bg-slate-950/30">
+          <span class="terminal-dot bg-red-400"></span><span class="terminal-dot bg-amber-400"></span><span class="terminal-dot bg-emerald-400"></span>
+          <span class="ml-3 code-font text-xs text-slate-500">production-mindset.sh</span>
+        </div>
+        <div class="p-6 md:p-8 code-font text-sm leading-8">
+          <p><span class="text-blue-400">$</span> ship every change</p><p class="text-slate-500">push, lint, test, build, deploy</p>
+          <p><span class="text-blue-400">$</span> keep it reliable</p><p class="text-slate-500">systemd, rollouts, stable endpoints</p>
+          <p><span class="text-blue-400">$</span> keep it visible</p><p class="text-slate-500">Loki logs, uptime checks, alerts</p>
+          <p><span class="text-blue-400">$</span> debug before guessing</p><p class="text-slate-500">nc, curl, Security Groups, logs</p>
+        </div>
+      </div>
+    </div>
+    <div id="focus-grid" class="grid md:grid-cols-2 lg:grid-cols-4 gap-5 mt-12"></div>
+  </div>
+</section>
+
+<section id="skills" class="py-24 px-6 bg-slate-900/50 border-y border-white/5">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex items-center gap-4 mb-12"><span class="section-number text-xl">02.</span><h2 class="text-3xl md:text-4xl font-bold text-white">Technical Arsenal</h2></div>
+    <div id="skills-grid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+  </div>
+</section>
+
+<section id="projects" class="py-24 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
+      <div class="flex items-center gap-4"><span class="section-number text-xl">03.</span><h2 class="text-3xl md:text-4xl font-bold text-white">Projects &amp; Impact</h2></div>
+      <p class="text-sm text-slate-500 max-w-xl">Four projects that show how I connect deployment, reliability and observability, with the real problems I hit along the way.</p>
+    </div>
+    <div id="projects-grid" class="grid lg:grid-cols-2 gap-8"></div>
+    <p class="text-sm text-slate-500 mt-8"><span class="text-slate-400 font-semibold">Also shipped:</span> a Grafana Loki label-cardinality audit (Jira DEV-290) and an n8n evaluation in an isolated staging environment.</p>
+    <div class="mt-14">
+      <div class="mb-8 max-w-3xl"><p class="code-font text-xs text-blue-400 mb-3">PRODUCTION EVIDENCE</p><h3 class="text-2xl md:text-3xl font-bold text-white">Case Studies</h3></div>
+      <div id="cases"></div>
+    </div>
+  </div>
+</section>
+
+<section id="production" class="py-24 px-6 bg-slate-900/50 border-y border-white/5">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex items-center gap-4 mb-12"><span class="section-number text-xl">04.</span><h2 class="text-3xl md:text-4xl font-bold text-white">How I Think About Production</h2></div>
+    <div id="mindset-grid" class="grid md:grid-cols-2 lg:grid-cols-5 gap-5"></div>
+  </div>
+</section>
+
+<section id="journey" class="py-24 px-6">
+  <div class="max-w-4xl mx-auto">
+    <div class="flex items-center gap-4 mb-12"><span class="section-number text-xl">05.</span><h2 class="text-3xl md:text-4xl font-bold text-white">Journey</h2></div>
+    <div id="journey-list" class="space-y-6 border-l border-white/10 pl-8"></div>
+  </div>
+</section>
+
+<section class="pb-24 px-6">
+  <div class="max-w-5xl mx-auto glass rounded-3xl p-8 md:p-12 text-center overflow-hidden relative">
+    <div class="absolute -top-20 -right-20 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-24 -left-20 w-72 h-72 bg-sky-500/10 rounded-full blur-3xl"></div>
+    <div class="relative">
+      <p class="code-font text-xs text-blue-400 mb-3">BUILD • SHIP • OBSERVE • IMPROVE</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-5">Real systems over theory.</h2>
+      <p class="text-slate-400 max-w-3xl mx-auto leading-8 mb-8">A green pipeline means nothing until the app is reachable in production. That is the standard I hold my own work to.</p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="https://github.com/tanahmeeedsx" target="_blank" rel="noopener noreferrer" class="px-7 py-3.5 bg-white text-slate-900 font-bold rounded-xl hover:bg-slate-200 transition"><i class="fa-brands fa-github mr-2"></i> GitHub</a>
+        <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="px-7 py-3.5 glass text-white font-bold rounded-xl hover:bg-white/5 transition"><i class="fa-solid fa-file-arrow-down mr-2"></i> Resume</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact" class="py-20 border-t border-white/5 bg-slate-950/30">
+  <div class="max-w-4xl mx-auto text-center px-6">
+    <p class="code-font text-xs text-blue-400 mb-3">AVAILABLE FOR THE RIGHT CHALLENGE</p>
+    <h2 class="text-3xl md:text-4xl font-bold gradient-text mb-4">Let's Build Something Reliable</h2>
+    <p class="text-slate-400 mb-8 max-w-2xl mx-auto leading-7">Open to DevOps, cloud, SRE and platform engineering opportunities where I can ship, operate and improve production systems.</p>
+    <div class="flex justify-center space-x-6 text-2xl mb-8">
+      <a href="https://www.linkedin.com/in/tanahmedd" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-blue-400 transition" aria-label="LinkedIn profile"><i class="fa-brands fa-linkedin"></i></a>
+      <a href="https://github.com/tanahmeeedsx" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-blue-400 transition" aria-label="GitHub profile"><i class="fa-brands fa-github"></i></a>
+      <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-blue-400 transition" aria-label="Open resume PDF"><i class="fa-solid fa-file-pdf"></i></a>
+      <a href="mailto:tanjimahmed450@gmail.com" class="text-slate-400 hover:text-blue-400 transition" aria-label="Send email"><i class="fa-solid fa-envelope"></i></a>
+    </div>
+    <p class="text-sm text-slate-500">LinkedIn • GitHub • Resume • Email</p>
+    <p class="mt-12 text-xs text-slate-600 code-font">Dhaka, Bangladesh | &copy; 2026 Tanjim Ahmed. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+const $=id=>document.getElementById(id);
+const I=(ic,c)=>`<i class="${ic} ${c}"></i>`;
+
+const focus=[
+["fa-solid fa-bolt","Faster Delivery","GitHub Actions pipelines that lint, test, scan, build and deploy on every push."],
+["fa-solid fa-server","Reliable Systems","systemd-managed services, tight Security Groups, and ECS force-new-deployment rollouts."],
+["fa-solid fa-chart-line","Observability","Grafana Loki stream audits, cron-based system monitoring, a live health dashboard and CI email alerts."],
+["fa-solid fa-lock","Secure Access","ED25519 SSH keys, key-only access, secrets kept out of Git, IAM-scoped access."]];
+$("focus-grid").innerHTML=focus.map(([i,t,d])=>`<div class="focus-card p-6 glass rounded-2xl hover:border-blue-500/50">${I(i,"text-blue-400 text-2xl mb-4")}<h3 class="text-white font-semibold mb-2">${t}</h3><p class="text-sm text-slate-500">${d}</p></div>`).join("");
+
+const skills=[
+["fa-solid fa-cloud","Cloud","AWS EC2, ECS (Fargate), ECR, VPC, IAM, Load Balancers, Security Groups"],
+["fa-brands fa-docker","Containers","Docker image builds, container deployments"],
+["fa-solid fa-code-merge","CI/CD","GitHub Actions, lint/test/security gates, automated rollouts, email alerts"],
+["fa-brands fa-git-alt","Version Control","Git, GitHub, SSH auth, branching, pull requests, conflict resolution"],
+["fa-solid fa-rotate","Automation","Bash, Python, n8n workflows, webhooks, Node.js, Go"],
+["fa-solid fa-chart-area","Observability","Grafana Loki, log and cardinality audits, cron monitoring, uptime checks"],
+["fa-solid fa-shield-halved","DevSecOps","GitHub secrets, secret scanning, CodeQL, npm audit, SSH hardening"],
+["fa-solid fa-terminal","Linux &amp; Systems","Ubuntu, systemd, Bash, SSH, network troubleshooting (nc, curl)"]];
+$("skills-grid").innerHTML=skills.map(([i,t,d])=>`<div class="skill-card p-6 glass rounded-2xl hover:border-blue-500/50">${I(i,"text-3xl text-blue-400 mb-4")}<h3 class="text-white font-semibold mb-3">${t}</h3><p class="text-sm text-slate-500 leading-6">${d}</p></div>`).join("");
+
+const P=[
+{c:"blue",ic:"fa-solid fa-triangle-exclamation",tag:"AWS EC2 / LINUX / MONGODB",title:"Incident Management &amp; On-Call Tracker on AWS EC2",
+gh:"https://github.com/tanahmeeedsx/incident-management",
+ch:"Move a cloned MERN app from a dev setup to a real cloud server, and keep it running when SSH, networking and Git auth got in the way.",
+so:"Provisioned Ubuntu 24.04 on EC2, locked access down with Security Groups and SSH keys, installed Node.js and MongoDB (under systemd), configured env vars, seeded the database and deployed.",
+im:"A running incident lifecycle app (report, assign, RCA, postmortem, MTTR metrics) and a repeatable way to debug SSH timeouts, dying processes and Git auth.",
+tools:["EC2","Ubuntu","Security Groups","MongoDB","systemd","Bash"],
+flow:[["fa-brands fa-github","GitHub Repo"],["fa-brands fa-aws","EC2 Ubuntu 24.04"],["fa-brands fa-node-js","Node.js + npm"],["fa-solid fa-database","MongoDB (systemd)"],["fa-solid fa-globe","Live App"]],
+cards:[["fa-solid fa-rocket","Deployment","Cloned the repo, ran the Bash installer.sh, set frontend and backend env vars, installed dependencies, seeded MongoDB and started the app."],
+["fa-solid fa-network-wired","Networking &amp; Access","Security Groups for SSH and app traffic, SSH key pairs plus EC2 Instance Connect, reachability checked with nc and curl ifconfig.me."],
+["fa-solid fa-gears","Process Management","MongoDB managed with systemd. Worked through app processes stopping after the SSH session closed."],
+["fa-solid fa-bug","Troubleshooting","SSH timeouts, a pending kernel upgrade, nested repo folders and Git auth failures, each solved step by step (nc, rsync, SSH-key Git auth)."],
+["fa-solid fa-shield-halved","Security Controls","Key-pair SSH, scoped Security Group rules and SSH-key-based Git authentication."],
+["fa-solid fa-circle-info","Ownership &amp; Status","The app is my mentor Md. Nure Alam Siddiq's project; I owned deployment, infrastructure and ops. The demo instance is currently stopped."]]},
+{c:"sky",ic:"fa-brands fa-docker",tag:"DOCKER / GITHUB ACTIONS / AWS ECS",title:"Docker to Production: Cloud Health Monitor",
+gh:"https://github.com/tanahmeeedsx/cloud-health-monitor",live:"https://cl-f7cef06746784ff99fecdb01e3767f98.ecs.us-east-1.on.aws",
+ch:"Tutorials stop at works on my machine. I wanted every change to reach a reachable production URL, and to be told when something breaks.",
+so:"Dockerized a Node.js and Express dashboard. GitHub Actions lints, tests and scans, blocks failures, pushes the image to ECR and rolls out on ECS Fargate, with an email alert on every run.",
+im:"Green pushes go from commit to live dashboard with no manual steps. Three real production failures found and fixed: CI noise, a Security Group, a changing IP.",
+tools:["Node.js","Docker","GitHub Actions","Amazon ECR","ECS Fargate","Security Groups"],
+flow:[["fa-brands fa-github","Git Push"],["fa-solid fa-gears","GitHub Actions"],["fa-brands fa-docker","Docker Image"],["fa-brands fa-aws","Amazon ECR"],["fa-solid fa-cubes","ECS Fargate"],["fa-solid fa-heart-pulse","Live Dashboard"]],
+cards:[["fa-solid fa-list-check","CI Quality Gates","ESLint, Prettier, Jest with a coverage threshold, eslint-plugin-security, npm audit and a Docker build. Any failure blocks the pipeline."],
+["fa-solid fa-rocket","Deployment","Image pushed to ECR and the ECS service redeployed with force-new-deployment once CI is green."],
+["fa-solid fa-eye","Monitoring &amp; Alerts","Email on every pipeline pass or fail via Actions secrets. Dashboard shows live CPU, memory and disk, a health banner and a URL uptime checker, refreshed every 5 seconds."],
+["fa-solid fa-triangle-exclamation","Incident 1: CI","1,000+ style errors came from an accidentally committed AWS CLI folder. Removed it from Git and added it to .gitignore."],
+["fa-solid fa-triangle-exclamation","Incident 2: Network","App unreachable after deploy because a Security Group rule blocked public traffic. Opened the correct inbound port."],
+["fa-solid fa-triangle-exclamation","Incident 3: Endpoint","Fargate assigns a new public IP on every restart, so I was testing a dead IP. Switched to the stable ECS service URL."]]},
+{c:"blue",ic:"fa-solid fa-code-branch",tag:"PYTHON / FASTAPI / GITHUB ACTIONS / AWS EC2",title:"Mini Todo API: Git-to-Deployment CI/CD",
+gh:"https://github.com/tanahmeeedsx/mini-todo-api",
+ch:"Understand how code becomes a live service, not just how to write the app.",
+so:"A FastAPI app with a pull-request Git workflow, GitHub Actions running tests plus dependency and security checks, secrets kept out of the repo, and deployment to EC2 under systemd.",
+im:"Debugged multiple failed CI runs until the pipeline went green, then verified the API live through its endpoints.",
+tools:["FastAPI","GitHub Actions","AWS EC2","systemd","Git"],
+flow:[["fa-solid fa-code-branch","Branch + PR"],["fa-solid fa-gears","GitHub Actions"],["fa-solid fa-shield-halved","Tests + Security"],["fa-brands fa-aws","AWS EC2"],["fa-solid fa-globe","Live API"]],
+cards:[["fa-brands fa-git-alt","Git Workflow","Branching, merging, pull requests, merge conflicts and commit history."],
+["fa-solid fa-list-check","CI Pipeline","Automated tests, dependency checks and security checks, with failed runs debugged one at a time."],
+["fa-solid fa-key","Secrets Handling","Sensitive values kept out of the repository and handled securely in the pipeline."],
+["fa-solid fa-rocket","Deployment","FastAPI deployed to AWS EC2 and run as a systemd service."],
+["fa-solid fa-circle-check","Verification","Live endpoint checked through the API after deployment."],
+["fa-solid fa-flag","Why It Mattered","My first Git-to-deployment workflow. The app was the practice environment, the pipeline was the point."]]},
+{c:"sky",ic:"fa-solid fa-diagram-project",tag:"N8N / BASEROW / MATTERMOST / WEBHOOKS",title:"Intern Pipeline Planning: Baserow, n8n, Mattermost",
+gh:"https://github.com/tanahmeeedsx/intern-pipeline-planning",
+ch:"Quiz submissions needed to reach the team automatically, without anyone copying results by hand.",
+so:"An event-driven workflow: a Baserow quiz submission triggers a webhook, n8n maps and transforms the fields, and a bot posts a structured result to Mattermost.",
+im:"Quiz submission handling now runs end to end, from form to chat notification, and the whole flow is documented in the repository.",
+tools:["n8n","Baserow","Webhooks","Mattermost","REST APIs"],
+flow:[["fa-solid fa-table","Baserow Form"],["fa-solid fa-link","Webhook"],["fa-solid fa-shuffle","n8n Field Mapping"],["fa-solid fa-comments","Mattermost Bot"]],
+cards:[["fa-solid fa-bolt","Event Trigger","A Baserow quiz form submission fires a webhook into n8n."],
+["fa-solid fa-shuffle","Field Mapping","n8n maps and transforms the submitted fields into a clean, structured payload."],
+["fa-solid fa-bell","Notification","A bot posts the structured quiz result to Mattermost."],
+["fa-solid fa-list-check","Scoring","A scoring script and answer-key notes are kept in the repository."],
+["fa-solid fa-file-lines","Documentation","Workflow screenshots and notes documented in the repository."],
+["fa-solid fa-flag","Why It Mattered","Built at Springer Capital to automate intern quiz submission handling end to end."]]}];
+
+const pill=(t,c)=>`<span class="px-2.5 py-1.5 bg-slate-800 rounded">${t}</span>`;
+const row=(l,t,w)=>`<div><p class="text-xs uppercase tracking-wider text-slate-500 font-bold mb-1">${l}</p><p class="${w?"text-white font-semibold":"text-slate-400"}">${t}</p></div>`;
+$("projects-grid").innerHTML=P.map((p,n)=>`<article class="project-card relative overflow-hidden rounded-3xl glass p-8 hover:border-${p.c}-500/50">
+<div class="flex justify-between items-start mb-7"><div class="p-3 bg-${p.c}-500/10 rounded-xl">${I(p.ic,`text-${p.c}-400 text-2xl`)}</div>
+<a href="${p.gh}" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white transition" aria-label="View ${p.title} on GitHub"><i class="fa-brands fa-github text-2xl"></i></a></div>
+<p class="code-font text-xs text-${p.c}-400 mb-3">${p.tag}</p><h3 class="text-2xl font-bold text-white mb-5">${p.title}</h3>
+<div class="space-y-5 text-sm leading-7">${row("Challenge",p.ch)}${row("Solution",p.so)}${row("Impact",p.im,1)}</div>
+<div class="flex flex-wrap gap-2 mt-7 text-[10px] font-bold uppercase tracking-wider">${p.tools.map(pill).join("")}</div>
+<div class="flex flex-wrap items-center gap-x-6 gap-y-3 mt-7"><a href="#case-${n}" data-case="${n}" class="inline-flex items-center text-sm font-semibold text-${p.c}-300 hover:text-white transition">View Case Study <i class="fa-solid fa-arrow-down ml-2 text-xs"></i></a>
+<a href="${p.gh}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm font-semibold text-slate-400 hover:text-white transition"><i class="fa-brands fa-github mr-2"></i> GitHub Repo <i class="fa-solid fa-arrow-up-right-from-square ml-2 text-xs"></i></a></div></article>`).join("");
+
+$("cases").innerHTML=P.map((p,n)=>`<details id="case-${n}" class="glass rounded-3xl overflow-hidden mb-8"${n==0?" open":""}>
+<summary class="cursor-pointer px-6 md:px-8 py-6 flex items-center justify-between gap-4 hover:bg-white/[0.02] transition"><div class="flex items-center gap-4">
+<div class="p-3 bg-${p.c}-500/10 rounded-xl">${I(p.ic,`text-${p.c}-400`)}</div><div><p class="code-font text-[11px] text-${p.c}-400 mb-1">CASE STUDY 0${n+1}</p><h4 class="text-xl font-bold text-white">${p.title}</h4></div></div>
+<i class="fa-solid fa-chevron-down chev text-slate-500"></i></summary>
+<div class="px-6 md:px-8 pb-8 border-t border-white/5"><div class="pt-8"><p class="text-xs uppercase tracking-wider text-slate-500 font-bold mb-4">Workflow</p>
+<div class="ev rounded-2xl p-5 md:p-7 overflow-x-auto"><div class="flex items-center gap-3 min-w-[760px] justify-center code-font text-xs">
+${p.flow.map(([i,l])=>`<div class="node">${I(i,"text-lg mb-2 text-"+p.c+"-300")}<br>${l}</div>`).join(`<i class="fa-solid fa-arrow-right text-slate-500"></i>`)}</div></div></div>
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-7">${p.cards.map(([i,t,d])=>`<div class="ev rounded-2xl p-5"><div class="flex items-center gap-3 mb-3">${I(i,`text-${p.c}-300`)}<h5 class="font-semibold text-white">${t}</h5></div><p class="text-sm text-slate-500 leading-6">${d}</p></div>`).join("")}</div>
+<div class="mt-7 flex flex-wrap gap-3"><a href="${p.gh}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-5 py-3 bg-${p.c}-600 text-white rounded-xl text-sm font-semibold hover:bg-${p.c}-500 transition"><i class="fa-brands fa-github mr-2"></i> Repository</a>
+${p.live?`<a href="${p.live}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-5 py-3 glass text-white rounded-xl text-sm font-semibold hover:bg-white/5 transition"><i class="fa-solid fa-arrow-up-right-from-square mr-2"></i> Live Dashboard</a>`:""}</div></div></details>`).join("");
+document.querySelectorAll("[data-case]").forEach(a=>a.addEventListener("click",()=>{$("case-"+a.dataset.case).open=true}));
+
+const mind=[
+["fa-solid fa-heart-pulse","Reliability","systemd services, ECS rollouts, and stable service URLs instead of IPs that change."],
+["fa-solid fa-lock","Security","Secrets out of Git, key-only SSH, scoped Security Groups, least-privilege IAM."],
+["fa-solid fa-eye","Observability","Loki logs, cron monitors, uptime checks and email alerts that say what happened."],
+["fa-solid fa-code-branch","Safe Delivery","Lint, tests and scans block a bad push before it reaches production."],
+["fa-solid fa-magnifying-glass","Debugging","Check one layer at a time with nc, curl and logs. No random setting changes."]];
+$("mindset-grid").innerHTML=mind.map(([i,t,d])=>`<div class="focus-card glass rounded-2xl p-6 hover:border-blue-500/50">${I(i,"text-blue-400 text-2xl mb-4")}<h3 class="text-white font-semibold mb-2">${t}</h3><p class="text-sm text-slate-500 leading-6">${d}</p></div>`).join("");
+
+const J=[
+["AUG 2026 - PRESENT","DevOps Intern","Springer Capital, Remote (Chicago, USA). Linux, Git, Docker, CI/CD, AWS, Grafana Loki and n8n automation with a cross-country team."],
+["2026","DevOps and Cloud Engineering","Certification track with bongoDev, where the Git, CI/CD and deployment projects above were built."],
+["NOV 2025 - FEB 2026","Junior Executive","SkyTech Solutions, Uttara. Client communication and lead handling."],
+["DEC 2021 - DEC 2025","B.Sc. in Computer Engineering","Bangladesh University of Business &amp; Technology (BUBT)."]];
+$("journey-list").innerHTML=J.map(([d,t,x])=>`<div class="relative"><span class="absolute -left-[37px] top-1.5 w-3 h-3 rounded-full bg-blue-500 ring-4 ring-[#0a1628]"></span><p class="code-font text-xs text-blue-400 mb-1">${d}</p><h3 class="text-white font-semibold text-lg">${t}</h3><p class="text-sm text-slate-500 leading-6 mt-1">${x}</p></div>`).join("");
+</script>
+</body>
+</html>

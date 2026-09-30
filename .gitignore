@@ -1,0 +1,6 @@
+.DS_Store
+*.pem
+*.key
+.env
+.env.*
+release.tar.gz

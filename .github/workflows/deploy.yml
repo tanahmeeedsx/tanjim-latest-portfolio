@@ -1,0 +1,217 @@
+name: Validate and Deploy Portfolio
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-portfolio
+  cancel-in-progress: false
+
+env:
+  SITE_DIR: site
+  APP_ROOT: /var/www/devops-portfolio
+
+jobs:
+  validate:
+    name: Validate static site
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Validate required site files
+        run: ./scripts/validate-site.sh "$SITE_DIR"
+
+      - name: Validate local HTML references
+        run: python3 ./tests/check-local-references.py "$SITE_DIR"
+
+      - name: Build immutable release archive
+        run: tar -C "$SITE_DIR" -czf release.tar.gz .
+
+      - name: Upload release artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: portfolio-${{ github.sha }}
+          path: release.tar.gz
+          if-no-files-found: error
+          retention-days: 7
+
+  deploy:
+    name: Deploy to EC2/Nginx
+    needs: validate
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Download validated release artifact
+        uses: actions/download-artifact@v5
+        with:
+          name: portfolio-${{ github.sha }}
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Resolve EC2 instance from public IP
+        env:
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+        run: |
+          set -euo pipefail
+
+          INSTANCE_DATA=$(aws ec2 describe-instances \
+            --filters \
+              "Name=ip-address,Values=${EC2_HOST}" \
+              "Name=instance-state-name,Values=running" \
+            --query 'Reservations[].Instances[].[InstanceId,Placement.AvailabilityZone]' \
+            --output text)
+
+          INSTANCE_COUNT=$(printf '%s\n' "$INSTANCE_DATA" | awk 'NF {count++} END {print count+0}')
+          if [ "$INSTANCE_COUNT" -ne 1 ]; then
+            echo "Expected exactly one running EC2 instance with public IP ${EC2_HOST}; found ${INSTANCE_COUNT}." >&2
+            exit 1
+          fi
+
+          INSTANCE_ID=$(printf '%s\n' "$INSTANCE_DATA" | awk '{print $1}')
+          AVAILABILITY_ZONE=$(printf '%s\n' "$INSTANCE_DATA" | awk '{print $2}')
+
+          echo "INSTANCE_ID=$INSTANCE_ID" >> "$GITHUB_ENV"
+          echo "AVAILABILITY_ZONE=$AVAILABILITY_ZONE" >> "$GITHUB_ENV"
+
+      - name: Generate temporary SSH key
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          ssh-keygen -q -t ed25519 -N '' -f ~/.ssh/ec2_instance_connect
+          ssh-keyscan -T 10 -H "${{ secrets.EC2_HOST }}" >> ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Upload release archive with EC2 Instance Connect
+        env:
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+          EC2_USER: ${{ secrets.EC2_USER }}
+          RELEASE_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+
+          aws ec2-instance-connect send-ssh-public-key \
+            --instance-id "$INSTANCE_ID" \
+            --availability-zone "$AVAILABILITY_ZONE" \
+            --instance-os-user "$EC2_USER" \
+            --ssh-public-key file://$HOME/.ssh/ec2_instance_connect.pub >/dev/null
+
+          scp \
+            -i ~/.ssh/ec2_instance_connect \
+            -o IdentitiesOnly=yes \
+            release.tar.gz \
+            "${EC2_USER}@${EC2_HOST}:/tmp/portfolio-${RELEASE_SHA}.tar.gz"
+
+      - name: Activate versioned release and verify health
+        env:
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+          EC2_USER: ${{ secrets.EC2_USER }}
+          RELEASE_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+
+          # EC2 Instance Connect keys are temporary, so push it again immediately
+          # before opening this second SSH connection.
+          aws ec2-instance-connect send-ssh-public-key \
+            --instance-id "$INSTANCE_ID" \
+            --availability-zone "$AVAILABILITY_ZONE" \
+            --instance-os-user "$EC2_USER" \
+            --ssh-public-key file://$HOME/.ssh/ec2_instance_connect.pub >/dev/null
+
+          ssh \
+            -i ~/.ssh/ec2_instance_connect \
+            -o IdentitiesOnly=yes \
+            "${EC2_USER}@${EC2_HOST}" \
+            "APP_ROOT='$APP_ROOT' RELEASE_SHA='$RELEASE_SHA' bash -s" <<'REMOTE'
+          set -euo pipefail
+
+          RELEASE="$APP_ROOT/releases/$RELEASE_SHA"
+          ARCHIVE="/tmp/portfolio-$RELEASE_SHA.tar.gz"
+          CURRENT="$APP_ROOT/current"
+          PREVIOUS=""
+
+          if [ -L "$CURRENT" ]; then
+            PREVIOUS=$(readlink -f "$CURRENT" || true)
+          fi
+
+          rollback() {
+            echo "Deployment failed. Attempting rollback..." >&2
+            if [ -n "$PREVIOUS" ] && [ -d "$PREVIOUS" ]; then
+              sudo ln -sfn "$PREVIOUS" "$CURRENT"
+              sudo nginx -t
+              sudo systemctl reload nginx
+              echo "Rolled back to: $PREVIOUS" >&2
+            else
+              echo "No previous release is available for rollback; removing the broken current symlink." >&2
+              sudo rm -f "$CURRENT"
+              sudo nginx -t
+              sudo systemctl reload nginx
+            fi
+            sudo rm -rf "$RELEASE"
+            rm -f "$ARCHIVE"
+          }
+          trap rollback ERR
+
+          sudo mkdir -p "$APP_ROOT/releases" "$RELEASE"
+          sudo tar -xzf "$ARCHIVE" -C "$RELEASE"
+          sudo chown -R www-data:www-data "$RELEASE"
+          sudo find "$RELEASE" -type d -exec chmod 755 {} \;
+          sudo find "$RELEASE" -type f -exec chmod 644 {} \;
+
+          test -s "$RELEASE/index.html"
+          test -s "$RELEASE/resume.pdf"
+
+          sudo ln -sfn "$RELEASE" "$CURRENT"
+          sudo nginx -t
+          sudo systemctl reload nginx
+
+          curl --fail --silent --show-error --retry 8 --retry-delay 2 \
+            http://127.0.0.1/health >/dev/null
+          curl --fail --silent --show-error --retry 8 --retry-delay 2 \
+            http://127.0.0.1/ >/dev/null
+
+          trap - ERR
+          rm -f "$ARCHIVE"
+
+          # Keep only the five newest releases, excluding the active release.
+          ACTIVE=$(readlink -f "$CURRENT")
+          mapfile -t OLD_RELEASES < <(
+            sudo find "$APP_ROOT/releases" -mindepth 1 -maxdepth 1 -type d -printf '%T@ %p\n' \
+              | sort -nr \
+              | awk 'NR>5 {print $2}'
+          )
+          for old in "${OLD_RELEASES[@]:-}"; do
+            if [ -n "$old" ] && [ "$old" != "$ACTIVE" ]; then
+              sudo rm -rf "$old"
+            fi
+          done
+
+          echo "Deployment successful: $RELEASE_SHA"
+          REMOTE
+
+      - name: Verify public endpoint
+        env:
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error --retry 10 --retry-delay 3 \
+            "http://${EC2_HOST}/health"
+          curl --fail --silent --show-error --retry 10 --retry-delay 3 \
+            "http://${EC2_HOST}/" >/dev/null
+          echo "Public deployment verification passed."
